@@ -1,69 +1,14 @@
-name: Deploy Angular to GitHub Pages
+name: Test Workflow
 
 on:
-push:
-branches:
-- main
-
-permissions:
-contents: read
-pages: write
-id-token: write
+  push:
+    branches:
+      - main
 
 jobs:
-build:
-runs-on: ubuntu-latest
+  test:
+    runs-on: ubuntu-latest
 
-```
-steps:
-  - name: Checkout Repository
-    uses: actions/checkout@v4
-
-  - name: Setup Node.js
-    uses: actions/setup-node@v4
-    with:
-      node-version: 18
-
-  - name: Show Node Version
-    run: node -v
-
-  - name: Show NPM Version
-    run: npm -v
-
-  - name: Install Dependencies
-    run: npm install
-
-  - name: Show Angular Packages
-    run: npm list @angular/cli @angular-devkit/build-angular || true
-
-  - name: List node_modules bin
-    run: ls -la node_modules/.bin || true
-
-  - name: Build Angular Application
-    run: ./node_modules/.bin/ng build comparehub --configuration production --base-href "/CompareHub/"
-
-  - name: Upload GitHub Pages Artifact
-    uses: actions/upload-pages-artifact@v3
-    with:
-      path: dist/comparehub
-```
-
-deploy:
-needs: build
-
-```
-runs-on: ubuntu-latest
-
-environment:
-  name: github-pages
-  url: ${{ steps.deployment.outputs.page_url }}
-
-permissions:
-  pages: write
-  id-token: write
-
-steps:
-  - name: Deploy to GitHub Pages
-    id: deployment
-    uses: actions/deploy-pages@v4
-```
+    steps:
+      - name: Hello
+        run: echo "Workflow is working"
