@@ -1,60 +1,54 @@
 name: Deploy Angular to GitHub Pages
 
 on:
-  push:
-    branches:
-      - main
+push:
+branches:
+- main
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: true
+contents: read
+pages: write
+id-token: write
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+build:
+runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+```
+steps:
+  - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: npm
+  - uses: actions/setup-node@v4
+    with:
+      node-version: 18
 
-      - name: Install Dependencies
-        run: npm install
+  - name: Install dependencies
+    run: npm install
 
-      - name: Install Angular CLI
-        run: npm install -g @angular/cli@15
+  - name: Verify Angular CLI
+    run: npx ng version
 
-      - name: Build Angular Application
-        run: ng build comparehub --configuration production --base-href "/CompareHub/"
+  - name: Build application
+    run: npx ng build --configuration production --base-href "/CompareHub/"
 
-      - name: Upload GitHub Pages Artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist/comparehub
+  - name: Upload artifact
+    uses: actions/upload-pages-artifact@v3
+    with:
+      path: dist/comparehub
+```
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+deploy:
+needs: build
 
-    needs: build
-    runs-on: ubuntu-latest
+```
+runs-on: ubuntu-latest
 
-    permissions:
-      pages: write
-      id-token: write
+environment:
+  name: github-pages
+  url: ${{ steps.deployment.outputs.page_url }}
 
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+steps:
+  - name: Deploy to GitHub Pages
+    id: deployment
+    uses: actions/deploy-pages@v4
+```
