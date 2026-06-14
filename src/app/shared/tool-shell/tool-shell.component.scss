@@ -1,0 +1,54 @@
+.tool-hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-end;
+  margin-bottom: 1.25rem;
+}
+
+.tool-hero > div {
+  min-width: 0;
+}
+
+h1 {
+  max-width: 900px;
+  margin: 0.25rem 0 0.5rem;
+  font-size: clamp(2rem, 4vw, 3.7rem);
+  line-height: 1;
+  overflow-wrap: anywhere;
+}
+
+.muted {
+  max-width: 720px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.stats-grid {
+  margin: 0 0 1rem;
+}
+
+.stats-grid span {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+  background: var(--surface);
+}
+
+@media (max-width: 680px) {
+  .tool-hero {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .tool-hero .btn {
+    width: 100%;
+  }
+
+  h1 {
+    max-width: calc(100vw - 2rem);
+    font-size: clamp(1.75rem, 8vw, 2rem);
+    line-height: 1.05;
+    overflow-wrap: normal;
+  }
+}

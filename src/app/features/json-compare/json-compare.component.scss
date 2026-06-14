@@ -1,0 +1,27 @@
+.compare-toolbar,
+.editor-grid,
+.results,
+.status {
+  margin-bottom: 1rem;
+}
+
+.status {
+  border-left: 4px solid var(--brand);
+  padding: 0.75rem 1rem;
+  background: var(--surface);
+}
+
+label.panel {
+  display: block;
+}
+
+.panel textarea {
+  border: 0;
+  border-radius: 0;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+.is-dragging {
+  outline: 3px solid var(--brand);
+  outline-offset: 2px;
+}

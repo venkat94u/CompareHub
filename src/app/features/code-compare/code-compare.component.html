@@ -1,0 +1,40 @@
+<div class="page">
+  <app-tool-shell
+    eyebrow="Code Compare"
+    heading="Compare Source Code"
+    description="Side-by-side source diffs with lightweight syntax highlighting."
+    [stats]="stats"
+    (fullscreen)="fullscreen()">
+
+    <div class="compare-toolbar">
+      <select [(ngModel)]="language" aria-label="Programming language">
+        <option *ngFor="let item of languages" [value]="item">{{ item | titlecase }}</option>
+      </select>
+      <button class="btn" type="button" (click)="compare()">Compare</button>
+      <button class="btn secondary" type="button" (click)="clear()">Clear</button>
+      <button class="btn secondary" type="button" (click)="copyResults()" [disabled]="!diff.length">Copy Results</button>
+      <button class="btn secondary" type="button" (click)="downloadResults()" [disabled]="!diff.length">Download Results</button>
+    </div>
+
+    <app-history-panel [items]="historyItems" (restore)="restoreHistory($event)"></app-history-panel>
+
+    <section class="editor-grid">
+      <label class="panel" appDropZone (fileDropped)="dropped($event, 'left')">
+        <span class="panel-header">Original Code</span>
+        <textarea [(ngModel)]="left" (ngModelChange)="save()" spellcheck="false" placeholder="Paste or drop original source"></textarea>
+      </label>
+      <label class="panel" appDropZone (fileDropped)="dropped($event, 'right')">
+        <span class="panel-header">Changed Code</span>
+        <textarea [(ngModel)]="right" (ngModelChange)="save()" spellcheck="false" placeholder="Paste or drop changed source"></textarea>
+      </label>
+    </section>
+
+    <section class="panel results" *ngIf="diff.length">
+      <div class="panel-header">Side By Side Diff</div>
+      <div class="result-grid">
+        <pre class="diff"><ng-container *ngFor="let line of diff"><span [class]="'line-' + line.kind" [innerHTML]="highlighted(line.left)"></span>{{ '\n' }}</ng-container></pre>
+        <pre class="diff"><ng-container *ngFor="let line of diff"><span [class]="'line-' + line.kind" [innerHTML]="highlighted(line.right)"></span>{{ '\n' }}</ng-container></pre>
+      </div>
+    </section>
+  </app-tool-shell>
+</div>

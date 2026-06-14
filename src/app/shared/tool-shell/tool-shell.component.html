@@ -1,0 +1,17 @@
+<section class="tool-hero">
+  <div>
+    <p class="eyebrow">{{ eyebrow }}</p>
+    <h1>{{ heading }}</h1>
+    <p class="muted">{{ description }}</p>
+  </div>
+  <button class="btn secondary" type="button" (click)="fullscreen.emit()" aria-label="Open full screen mode">Full Screen</button>
+</section>
+
+<section class="stats-grid" *ngIf="stats">
+  <span>Total Lines: <strong>{{ stats.totalLines }}</strong></span>
+  <span>Added: <strong>{{ stats.linesAdded }}</strong></span>
+  <span>Removed: <strong>{{ stats.linesRemoved }}</strong></span>
+  <span>Modified: <strong>{{ stats.linesModified }}</strong></span>
+</section>
+
+<ng-content></ng-content>

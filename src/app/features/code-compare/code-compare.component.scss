@@ -1,0 +1,38 @@
+.compare-toolbar,
+.editor-grid,
+.results {
+  margin-bottom: 1rem;
+}
+
+select {
+  min-height: 2.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0 0.8rem;
+  background: var(--surface);
+  color: var(--text);
+}
+
+label.panel {
+  display: block;
+}
+
+.panel textarea {
+  border: 0;
+  border-radius: 0;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+.is-dragging {
+  outline: 3px solid var(--brand);
+  outline-offset: 2px;
+}
+
+:host ::ng-deep .token-keyword {
+  color: var(--brand-strong);
+  font-weight: 800;
+}
+
+:host ::ng-deep .token-string {
+  color: var(--modified-text);
+}

@@ -1,0 +1,29 @@
+.compare-toolbar,
+.option-grid,
+.editor-grid,
+.results {
+  margin-bottom: 1rem;
+}
+
+select {
+  min-height: 2.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0 0.8rem;
+  background: var(--surface);
+  color: var(--text);
+}
+
+label.panel {
+  display: block;
+}
+
+.panel textarea {
+  border: 0;
+  border-radius: 0;
+}
+
+.is-dragging {
+  outline: 3px solid var(--brand);
+  outline-offset: 2px;
+}

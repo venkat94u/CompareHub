@@ -1,27 +1,58 @@
-# Comparehub
+# CompareHub
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.11.
+CompareHub is a fast, privacy-first Angular comparison platform for Text, JSON and Source Code. All comparisons run in the browser: no backend, no database, no authentication and no uploads.
 
-## Development server
+## Architecture
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Angular standalone components with lazy loaded routes.
+- Routes: `/`, `/text-compare`, `/json-compare`, `/code-compare`.
+- Folders: `core`, `shared`, `features`, `services`, `models`, `themes`, `layouts`.
+- Shared UI: `ToolShellComponent` and `DropZoneDirective`.
+- Services: `DiffService`, `StorageService`, `ThemeService`, `SeoService`.
+- Theme: CSS custom properties in `src/styles.scss`, system dark-mode detection and persisted toggle.
+- SEO: route titles, dynamic meta tags, Open Graph tags, `robots.txt` and `sitemap.xml`.
 
-## Code scaffolding
+## Features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Text compare with side-by-side and inline views.
+- JSON validation, pretty formatting and diff highlighting.
+- Code compare for TypeScript, JavaScript, HTML, CSS, Java and Python.
+- Keyboard shortcuts: `Ctrl/Cmd + Enter` to compare; `Ctrl/Cmd + K` clears text compare.
+- Autosave drafts, local comparison history, drag and drop files, full screen mode and comparison statistics.
 
-## Build
+## Implementation Plan
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. App foundation: standalone bootstrap, lazy routing, layout, theme and SEO services.
+2. Home module: hero, tool cards, trust signals, benefits, FAQ and footer.
+3. Text module: options, side-by-side view, inline view, stats, copy and download.
+4. JSON module: validation, pretty formatting, comparison, copy and download.
+5. Code module: language selection, lightweight syntax highlighting and side-by-side diff.
+6. Hardening: unit tests for diff logic, accessibility checks, Lighthouse pass and GitHub Pages deployment.
 
-## Running unit tests
+## Development
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run the local dev server:
 
-## Running end-to-end tests
+```bash
+npm start
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Build for production:
 
-## Further help
+```bash
+npm run build
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Build for GitHub Pages:
+
+```bash
+npm run build:gh-pages
+```
+
+Deploy with:
+
+```bash
+npm run deploy:gh-pages
+```
+
+`deploy:gh-pages` uses `angular-cli-ghpages` through `npx`; install or approve the package when prompted by your package manager.

@@ -1,0 +1,90 @@
+<div class="page">
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Private local comparison tool</p>
+      <h1>The Fastest Privacy-First Compare Tool</h1>
+      <p class="hero-subtitle">Compare Text, JSON and Source Code instantly. No login. No uploads. No data leaves your browser.</p>
+      <div class="hero-actions">
+        <a class="btn" routerLink="/text-compare">Start Comparing</a>
+        <a class="btn secondary" routerLink="/json-compare">Format JSON</a>
+      </div>
+      <div class="hero-proof" aria-label="CompareHub privacy guarantees">
+        <span>Runs locally</span>
+        <span>No accounts</span>
+        <span>Instant results</span>
+      </div>
+    </div>
+
+    <div class="hero-preview" aria-label="Comparison preview">
+      <div class="preview-topbar">
+        <span></span>
+        <span></span>
+        <span></span>
+        <strong>comparehub.diff</strong>
+      </div>
+      <div class="preview-grid">
+        <div class="preview-pane">
+          <small>Original</small>
+          <code>privacy: upload_required</code>
+          <code>speed: waiting</code>
+          <code>result: server_processed</code>
+        </div>
+        <div class="preview-pane">
+          <small>Changed</small>
+          <code class="good">privacy: browser_only</code>
+          <code class="good">speed: instant</code>
+          <code class="warn">result: local_diff</code>
+        </div>
+      </div>
+      <div class="preview-footer">
+        <span>100% browser based</span>
+        <span>0 uploads</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="tool-section">
+    <div class="section-heading">
+      <p class="eyebrow">Pick your workflow</p>
+      <h2 class="section-title">Choose a Tool</h2>
+    </div>
+    <div class="tool-grid">
+      <a class="tool-card" *ngFor="let tool of tools" [routerLink]="tool.path">
+        <span class="tool-icon" aria-hidden="true">{{ tool.title.charAt(0) }}</span>
+        <strong>{{ tool.title }}</strong>
+        <span class="muted">{{ tool.body }}</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="section-heading centered">
+      <p class="eyebrow">Privacy by design</p>
+      <h2 class="section-title">Built for Trust</h2>
+    </div>
+    <div class="pill-grid trust-grid">
+      <span *ngFor="let item of trust">{{ item }}</span>
+    </div>
+  </section>
+
+  <section class="split">
+    <div>
+      <h2 class="section-title">Why CompareHub</h2>
+      <p class="muted">Fast comparison workflows, clean results and privacy-first defaults for everyday work.</p>
+    </div>
+    <div class="pill-grid benefit-grid">
+      <span *ngFor="let item of benefits">{{ item }}</span>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-heading">
+      <p class="eyebrow">Quick answers</p>
+      <h2 class="section-title">FAQ</h2>
+    </div>
+    <details *ngFor="let faq of faqs">
+      <summary>{{ faq[0] }}</summary>
+      <p class="muted">{{ faq[1] }}</p>
+    </details>
+  </section>
+</div>

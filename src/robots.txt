@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://comparehub.github.io/comparehub/sitemap.xml

@@ -1,0 +1,52 @@
+<div class="page">
+  <app-tool-shell
+    eyebrow="Text Compare"
+    heading="Compare Plain Text"
+    description="Side-by-side and inline text diffs run locally in your browser."
+    [stats]="stats"
+    (fullscreen)="fullscreen()">
+
+    <div class="compare-toolbar">
+      <button class="btn" type="button" (click)="compare()">Compare</button>
+      <button class="btn secondary" type="button" (click)="clear()">Clear</button>
+      <button class="btn secondary" type="button" (click)="copyResults()" [disabled]="!diff.length">Copy Results</button>
+      <button class="btn secondary" type="button" (click)="downloadResults()" [disabled]="!diff.length">Download Results</button>
+      <select [(ngModel)]="viewMode" aria-label="Diff view mode">
+        <option value="side">Side By Side View</option>
+        <option value="inline">Inline View</option>
+      </select>
+    </div>
+
+    <div class="option-grid" aria-label="Text compare options">
+      <label><input type="checkbox" [(ngModel)]="options.ignoreCase"> Ignore Case</label>
+      <label><input type="checkbox" [(ngModel)]="options.ignoreSpaces"> Ignore Spaces</label>
+      <label><input type="checkbox" [(ngModel)]="options.ignoreEmptyLines"> Ignore Empty Lines</label>
+      <label><input type="checkbox" [(ngModel)]="options.ignoreLineBreaks"> Ignore Line Breaks</label>
+      <label><input type="checkbox" [(ngModel)]="options.trimWhitespace"> Trim Whitespace</label>
+    </div>
+
+    <app-history-panel [items]="historyItems" (restore)="restoreHistory($event)"></app-history-panel>
+
+    <section class="editor-grid">
+      <label class="panel" appDropZone (fileDropped)="dropped($event, 'left')">
+        <span class="panel-header">Original</span>
+        <textarea [(ngModel)]="left" (ngModelChange)="save()" placeholder="Paste or drop original text"></textarea>
+      </label>
+      <label class="panel" appDropZone (fileDropped)="dropped($event, 'right')">
+        <span class="panel-header">Changed</span>
+        <textarea [(ngModel)]="right" (ngModelChange)="save()" placeholder="Paste or drop changed text"></textarea>
+      </label>
+    </section>
+
+    <section class="panel results" *ngIf="diff.length">
+      <div class="panel-header">Results</div>
+      <div class="result-grid" *ngIf="viewMode === 'side'; else inlineView">
+        <pre class="diff"><ng-container *ngFor="let line of diff"><span [class]="'line-' + line.kind">{{ line.left || '' }}</span>{{ '\n' }}</ng-container></pre>
+        <pre class="diff"><ng-container *ngFor="let line of diff"><span [class]="'line-' + line.kind">{{ line.right || '' }}</span>{{ '\n' }}</ng-container></pre>
+      </div>
+      <ng-template #inlineView>
+        <pre class="diff"><ng-container *ngFor="let line of diff"><span [class]="'line-' + line.kind">{{ line.text || '' }}</span>{{ '\n' }}</ng-container></pre>
+      </ng-template>
+    </section>
+  </app-tool-shell>
+</div>

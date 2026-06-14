@@ -1,0 +1,38 @@
+<div class="app-background" [ngClass]="backgroundClass" aria-hidden="true">
+  <span class="aurora aurora-one"></span>
+  <span class="aurora aurora-two"></span>
+  <span class="aurora aurora-three"></span>
+  <span class="mesh mesh-one"></span>
+  <span class="mesh mesh-two"></span>
+</div>
+
+<header class="site-header">
+  <a class="brand" routerLink="/" aria-label="CompareHub home">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 40 40" role="img">
+        <path class="mark-shell" d="M20 3 35 11.5v17L20 37 5 28.5v-17L20 3Z" />
+        <path class="mark-left" d="M13 14h9l-4.5 12H8.5L13 14Z" />
+        <path class="mark-right" d="M27 14h-9l4.5 12h9L27 14Z" />
+        <path class="mark-spark" d="M20 9.5 22.3 14h-4.6L20 9.5Z" />
+      </svg>
+    </span>
+    <span>CompareHub</span>
+  </a>
+  <nav aria-label="Primary navigation">
+    <a routerLink="/text-compare" routerLinkActive="active">Text</a>
+    <a routerLink="/json-compare" routerLinkActive="active">JSON</a>
+    <a routerLink="/code-compare" routerLinkActive="active">Code</a>
+  </nav>
+  <button class="theme-toggle" type="button" (click)="toggleTheme()" [attr.aria-label]="'Switch theme'">
+    {{ (mode$ | async) === 'dark' ? 'Light' : 'Dark' }}
+  </button>
+</header>
+
+<main>
+  <ng-content></ng-content>
+</main>
+
+<footer class="site-footer">
+  <span>CompareHub</span>
+  <span>Privacy-first browser tools. No uploads, no accounts, no tracking.</span>
+</footer>

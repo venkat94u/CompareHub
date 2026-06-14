@@ -1,0 +1,41 @@
+<div class="page">
+  <app-tool-shell
+    eyebrow="JSON Compare"
+    heading="Validate and Compare JSON"
+    description="Format JSON and highlight changes without sending payloads anywhere."
+    [stats]="stats"
+    (fullscreen)="fullscreen()">
+
+    <div class="compare-toolbar">
+      <button class="btn" type="button" (click)="validate()">Validate JSON</button>
+      <button class="btn secondary" type="button" (click)="pretty()">Pretty Format JSON</button>
+      <button class="btn" type="button" (click)="compare()">Compare JSON</button>
+      <button class="btn secondary" type="button" (click)="clear()">Clear</button>
+      <button class="btn secondary" type="button" (click)="copyResults()" [disabled]="!diff.length">Copy Results</button>
+      <button class="btn secondary" type="button" (click)="downloadResults()" [disabled]="!diff.length">Download Results</button>
+    </div>
+
+    <p class="status" *ngIf="message">{{ message }}</p>
+
+    <app-history-panel [items]="historyItems" (restore)="restoreHistory($event)"></app-history-panel>
+
+    <section class="editor-grid">
+      <label class="panel" appDropZone (fileDropped)="dropped($event, 'left')">
+        <span class="panel-header">Original JSON</span>
+        <textarea [(ngModel)]="left" (ngModelChange)="save()" spellcheck="false" placeholder='{"name":"CompareHub"}'></textarea>
+      </label>
+      <label class="panel" appDropZone (fileDropped)="dropped($event, 'right')">
+        <span class="panel-header">Changed JSON</span>
+        <textarea [(ngModel)]="right" (ngModelChange)="save()" spellcheck="false" placeholder='{"name":"CompareHub","fast":true}'></textarea>
+      </label>
+    </section>
+
+    <section class="panel results" *ngIf="diff.length">
+      <div class="panel-header">Difference Highlighting</div>
+      <div class="result-grid">
+        <pre class="diff"><ng-container *ngFor="let line of diff"><span [class]="'line-' + line.kind">{{ line.left || '' }}</span>{{ '\n' }}</ng-container></pre>
+        <pre class="diff"><ng-container *ngFor="let line of diff"><span [class]="'line-' + line.kind">{{ line.right || '' }}</span>{{ '\n' }}</ng-container></pre>
+      </div>
+    </section>
+  </app-tool-shell>
+</div>

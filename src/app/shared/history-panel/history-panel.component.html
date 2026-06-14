@@ -1,0 +1,17 @@
+<section class="history-panel" *ngIf="items.length">
+  <div class="history-header">
+    <div>
+      <p class="eyebrow">Local history</p>
+      <h2>Last 20 Compared Results</h2>
+    </div>
+    <span>{{ items.length }} saved locally</span>
+  </div>
+
+  <div class="history-list">
+    <button class="history-item" type="button" *ngFor="let item of items" (click)="restore.emit(item)">
+      <strong>{{ item.label }}</strong>
+      <span>{{ item.createdAt | date:'medium' }}</span>
+      <small>{{ preview(item) }}</small>
+    </button>
+  </div>
+</section>
