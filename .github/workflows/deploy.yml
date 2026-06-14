@@ -19,37 +19,40 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
+          cache: npm
 
       - name: Install Dependencies
-        run: npm ci
+        run: npm install
 
-      - name: Build Angular
-        run: npx ng build --configuration production --base-href "/CompareHub/"
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli@15
 
-      - name: Upload Artifact
+      - name: Build Angular Application
+        run: ng build comparehub --configuration production --base-href "/CompareHub/"
+
+      - name: Upload GitHub Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist/comparehub
 
   deploy:
-    needs: build
-
-    permissions:
-      pages: write
-      id-token: write
-
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
+    needs: build
     runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
 
     steps:
       - name: Deploy to GitHub Pages
