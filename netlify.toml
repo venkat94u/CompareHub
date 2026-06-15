@@ -1,6 +1,7 @@
 [build]
-command = "npm install && npm run build"
+command = "npm install --include=dev && ./node_modules/.bin/ng build"
 publish = "dist/comparehub"
 
 [build.environment]
 NODE_VERSION = "18"
+NPM_FLAGS = "--include=dev"
