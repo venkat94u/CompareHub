@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://textcompareapp.netlify.app/sitemap.xml
+Sitemap: https://text-comparing.netlify.app/sitemap.xml
